@@ -40,7 +40,7 @@ unpack-mvn-tarball:
     - require:
       - file.directory: {{ prefix }}
 
-jdk-config:
+mvn-config:
   file.managed:
     - name: /etc/profile.d/apache-maven.sh
     - source: salt://mvn/apache-maven.sh
