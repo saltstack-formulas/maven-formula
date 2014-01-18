@@ -1,8 +1,10 @@
-===
-mvn
-===
+=============
+maven-formula
+=============
 
-Formula to set up and configure Apache Maven
+No maven package is currently available for CentOS, installing maven on a minimal Fedora 20 system will add no less than
+152 dependencies! This formula pulls the official Apache Maven tarball and installs it. There are no dependencies even
+though you will need a JVM installed to run maven in the end.
 
 .. note::
 
@@ -15,9 +17,13 @@ Available states
 .. contents::
     :local:
 
-``mvn``
+``maven``
 
-Downloads the tarball from the master (must exist as mvn/files/<tgz>) or downloads from the source URL if configured and installs the package. It will then configure alternatives and place /etc/profile.d/mvn.sh.  Please see the pillar.example for configuration.
+Downloads the tarball from **maven:source_url** and unpacks it. It will also configure an alternatives path.
+The current default is **maven:version** of 3.1.1
 
-Requires RedHat/CentOS 5.X or RedHat/CentOS 6.X - should also work on Debian/Ubuntu.
+``maven.env``
+Adds /etc/profile.d/mvn.sh, this will add M2_HOME and the mvn M2_HOME/bin to the PATH of any user.
+
+Please see the pillar.example for configuration.
 
