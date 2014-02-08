@@ -18,11 +18,14 @@ Available states
     :local:
 
 ``maven``
+---------
 
 Downloads the tarball from **maven:source_url** and unpacks it. It will also configure an alternatives path.
 The current default is **maven:version** of 3.1.1
 
 ``maven.env``
+-------------
+
 Adds /etc/profile.d/mvn.sh, this will add M2_HOME and the mvn M2_HOME/bin to the PATH of any user.
 
 Please see the pillar.example for configuration.
