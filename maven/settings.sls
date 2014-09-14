@@ -1,7 +1,7 @@
 {% set p  = salt['pillar.get']('maven', {}) %}
 {% set g  = salt['grains.get']('maven', {}) %}
 
-{%- set version        = g.get('version', p.get('version', '3.2.1')) %}
+{%- set version        = g.get('version', p.get('version', '3.2.2')) %}
 {%- set major          = version.split('.') | first %}
 {%- set version_name   = 'apache-maven-' + version %}
 
