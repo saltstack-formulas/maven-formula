@@ -21,7 +21,7 @@ Available states
 ---------
 
 Downloads the tarball from **maven:source_url** and unpacks it. It will also configure an alternatives path.
-The current default is **maven:version** of 3.1.1
+The current default is **maven:version** of 3.3.1
 
 ``maven.env``
 -------------
