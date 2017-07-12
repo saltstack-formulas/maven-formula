@@ -1,6 +1,6 @@
 maven:
-  version: 3.1.1
-  source_url: http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+  version: 3.3.9
+  source_url: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
   prefix: /usr/lib
   m2_home: /usr/lib/apache-maven
-
+  real_home: /usr/lib/maven
