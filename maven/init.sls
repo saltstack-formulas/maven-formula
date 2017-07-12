@@ -1,19 +1,71 @@
 {%- from 'maven/settings.sls' import maven with context %}
 
-{{ maven.prefix }}:
+{#- require a source_url - there is no default download location for Maven #}
+
+{%- if maven.source_url is defined %}
+
+  {%- set archive_file = maven.prefix + '/' + maven.source_url.split('/') | last %}
+
+maven-install-dir:
   file.directory:
+    - name: {{ maven.prefix }}
     - user: root
     - group: root
     - mode: 755
+    - makedirs: True
 
-unpack-mvn-tarball:
+# curl fails (rc=23) if file exists
+{{ archive_file }}:
+  file.absent:
+    - require_in:
+      - maven-download-archive
+
+maven-download-archive:
   cmd.run:
-    - name: curl -L '{{ maven.source_url }}' | tar xz
-    - cwd: {{ maven.prefix }}
-    - unless: test -d {{ maven.real_home }}
+    - name: curl {{ maven.dl_opts }} -o '{{ archive_file }}' '{{ maven.source_url }}'
+    - unless: test -d {{ maven.maven_realcmd }} || test -f {{ archive_file }}
+    - require:
+      - file: maven-install-dir
+    - require_in:
+      - maven-unpack-archive
 
-apache-maven-home-link:
-  alternatives.install:
-    - link: {{ maven.m2_home }}
-    - path: {{ maven.real_home }}
-    - priority: 30
+maven-unpack-archive:
+  archive.extracted:
+    - name: {{ maven.prefix }}
+    - source: file://{{ archive_file }}
+    {%- if maven.source_hash %}
+    - source_hash: {{ maven.source_hash }}
+    {%- endif %}
+    - archive_format: {{ maven.archive_type }} 
+    - options: {{ maven.unpack_opts }}
+    - user: root
+    - group: root
+    - onchanges:
+      - cmd: maven-download-archive
+
+maven-update-home-symlink:
+  file.symlink:
+    - name: {{ maven.maven_home }}
+    - target: {{ maven.maven_real_home }}
+    - force: True
+    - require:
+      - maven-unpack-archive
+
+maven-remove-archive:
+  file.absent:
+    - name: {{ archive_file }}
+    - require:
+      - maven-unpack-archive
+
+{%- if maven.source_hash %}
+maven-remove-archive-hash:
+  file.absent:
+    - name: {{ archive_file }}.sha256
+    - require:
+      - maven-unpack-archive
+{%- endif %}
+
+include:
+- .env
+
+{%- endif %}
