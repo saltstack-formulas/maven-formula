@@ -10,5 +10,5 @@ maven:
   real_home: /opt/maven
   symlink: /usr/bin/mvn
   realcmd: /opt/maven/bin/mvn
-  alts_priority: 10000
+  alt_priority: 10000
 
