@@ -3,7 +3,11 @@
 maven-config:
   file.managed:
     - name: /etc/profile.d/apache-maven.sh
+<<<<<<< HEAD
     - source: salt://maven/file/apache-maven.sh
+=======
+    - source: salt://maven/files/apache-maven.sh
+>>>>>>> 69b51a61631fd1528b35afe65157086f21fa4620
     - template: jinja
     - mode: 644
     - user: root
