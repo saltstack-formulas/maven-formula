@@ -15,6 +15,7 @@ maven-install-dir:
     - makedirs: True
 
 # curl fails (rc=23) if file exists
+# and test -f cannot detect corrupt archive-file.
 {{ archive_file }}:
   file.absent:
     - require_in:
@@ -23,7 +24,7 @@ maven-install-dir:
 maven-download-archive:
   cmd.run:
     - name: curl {{ maven.dl_opts }} -o '{{ archive_file }}' '{{ maven.source_url }}'
-    - unless: test -d {{ maven.maven_realcmd }} || test -f {{ archive_file }}
+    - unless: test -d {{ maven.maven_realcmd }}
     - require:
       - file: maven-install-dir
     - require_in:
@@ -37,7 +38,6 @@ maven-unpack-archive:
     - source_hash: {{ maven.source_hash }}
     {%- endif %}
     - archive_format: {{ maven.archive_type }} 
-    - options: {{ maven.unpack_opts }}
     - user: root
     - group: root
     - onchanges:
@@ -64,8 +64,5 @@ maven-remove-archive-hash:
     - require:
       - maven-unpack-archive
 {%- endif %}
-
-include:
-- .env
 
 {%- endif %}
