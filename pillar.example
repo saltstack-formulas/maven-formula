@@ -6,9 +6,9 @@ maven:
   prefix: /usr/lib
   m2_home: /usr/lib/apache-maven
   dl_opts: -s
-  unpack_opts: z
   archive_type: tar
   real_home: /opt/maven
   symlink: /usr/bin/mvn
   realcmd: /opt/maven/bin/mvn
+  alts_priority: 10000
 
