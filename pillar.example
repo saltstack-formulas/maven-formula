@@ -1,6 +1,14 @@
+maven_home: /opt/maven
 maven:
-  version: 3.1.1
-  source_url: http://www.us.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+  version: 3.3.9
+  source_url: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+  source_hash: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz.sha1
   prefix: /usr/lib
   m2_home: /usr/lib/apache-maven
+  dl_opts: -s
+  archive_type: tar
+  real_home: /opt/maven
+  symlink: /usr/bin/mvn
+  realcmd: /opt/maven/bin/mvn
+  alt_priority: 10000
 
