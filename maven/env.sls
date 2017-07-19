@@ -21,7 +21,7 @@ maven-settings:
     - user: root
     - group: root
     - context:
-      domain: {{ maven.orgdomain }}
+      orgdomain: {{ maven.orgdomain }}
       scmhost: {{ maven.scmhost }}
       repohost: {{ maven.repohost }}
 
