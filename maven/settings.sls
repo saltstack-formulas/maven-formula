@@ -7,7 +7,10 @@
 {%- set major              = version.split('.') | first %}
 {%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
-{%- set default_domain     = 'example.com' %}
+{%- set default_orgdomain  = 'example.com' %}
+{%- set default_nexushost  = 'scmhost' %}
+{%- set default_repohost   = 'repository' %}
+
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
 {%- set default_source_hash = default_source_url + '.sha1' %}
@@ -26,7 +29,10 @@
   {%- set source_hash      = g.get('source_hash', p.get('source_hash', default_source_hash )) %}
 {%- endif %}
 
-{%- set mydomain           = g.get('mydomain", [.get('mydomain', default_domain )) %}
+{%- set orgdomain          = g.get('orgdomain', [.get('orgdomain', default_orgdomain )) %}
+{%- set nexushost          = g.get('nexushost', [.get('nexushost', default_nexushost )) %}
+{%- set repohost           = g.get('repohost', [.get('repohost', default_repohost )) %}
+
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
 {%- set prefix             = g.get('prefix', p.get('prefix', default_prefix )) %}
@@ -42,7 +48,9 @@
                          'source_url'   : source_url,
                          'source_hash'  : source_hash,
                          'prefix'       : prefix,
-                         'mydomain'     : mydomain,
+                         'orgdomain'    : orgdomain,
+                         'nexushost'    : nexushost,
+                         'repohost'     : repohost,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
                          'archive_type' : archive_type,
