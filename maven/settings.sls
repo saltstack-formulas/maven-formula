@@ -1,18 +1,19 @@
 {% set p  = salt['pillar.get']('maven', {}) %}
 {% set g  = salt['grains.get']('maven', {}) %}
 
-{%- set maven_home      = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
+{%- set maven_home         = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
 
-{%- set version        = g.get('version', p.get('version', '3.3.9')) %}
-{%- set major          = version.split('.') | first %}
-{%- set mirror         = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
+{%- set version            = g.get('version', p.get('version', '3.3.9')) %}
+{%- set major              = version.split('.') | first %}
+{%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
+{%- set default_domain     = 'example.com' %}
 {%- set default_prefix     = '/usr/lib' %}
-{%- set default_m2_home    = default_prefix + '/apache-maven-' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
 {%- set default_source_hash = default_source_url + '.sha1' %}
 {%- set default_dl_opts    = ' -s ' %}
 {%- set default_real_home  = default_prefix + '/apache-maven-' + version %}
+{%- set default_m2_home    = default_real_home %}
 {%- set default_symlink    = '/usr/bin/mvn' %}
 {%- set default_realcmd    = maven_home + '/bin/mvn' %}
 {%- set default_alt_priority = '30' %}
@@ -25,6 +26,7 @@
   {%- set source_hash      = g.get('source_hash', p.get('source_hash', default_source_hash )) %}
 {%- endif %}
 
+{%- set mydomain           = g.get('mydomain", [.get('mydomain', default_domain )) %}
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
 {%- set prefix             = g.get('prefix', p.get('prefix', default_prefix )) %}
@@ -40,6 +42,7 @@
                          'source_url'   : source_url,
                          'source_hash'  : source_hash,
                          'prefix'       : prefix,
+                         'mydomain'     : mydomain,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
                          'archive_type' : archive_type,
