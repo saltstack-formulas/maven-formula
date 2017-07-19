@@ -11,6 +11,18 @@ maven-config:
     - context:
       m2_home: {{ maven.m2_home }}
 
+maven-settings:
+  file.managed:
+    - name: /home/{{ pillar['user'] }}/.m2/settings.xml
+    - source: salt://maven/files/maven-settings.xml
+    - template: jinja
+    - makedirs: True
+    - mode: 644
+    - user: root
+    - group: root
+    - context:
+      mydomain: {{ maven.mydomain }}
+
 # Add maven to alternatives system
 maven-home-alt-install:
   alternatives.install:
