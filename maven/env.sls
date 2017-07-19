@@ -21,7 +21,9 @@ maven-settings:
     - user: root
     - group: root
     - context:
-      mydomain: {{ maven.mydomain }}
+      domain: {{ maven.orgdomain }}
+      scmhost: {{ maven.scmhost }}
+      repohost: {{ maven.repohost }}
 
 # Add maven to alternatives system
 maven-home-alt-install:
