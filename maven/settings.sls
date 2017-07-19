@@ -30,8 +30,8 @@
 {%- endif %}
 
 {%- set orgdomain          = g.get('orgdomain', [p.get('orgdomain', default_orgdomain )) %}
-{%- set nexushost          = g.get('nexushost', [.pget('nexushost', default_nexushost )) %}
-{%- set repohost           = g.get('repohost', [.pget('repohost', default_repohost )) %}
+{%- set nexushost          = g.get('nexushost', [p.get('nexushost', default_nexushost )) %}
+{%- set repohost           = g.get('repohost', [p.get('repohost', default_repohost )) %}
 
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
