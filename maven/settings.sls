@@ -8,7 +8,7 @@
 {%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
 {%- set default_orgdomain  = 'example.com' %}
-{%- set default_nexushost  = 'scmhost' %}
+{%- set default_scmhost    = 'scmhost' %}
 {%- set default_repohost   = 'repository' %}
 
 {%- set default_prefix     = '/usr/lib' %}
@@ -30,7 +30,7 @@
 {%- endif %}
 
 {%- set orgdomain          = g.get('orgdomain', p.get('orgdomain', default_orgdomain )) %}
-{%- set nexushost          = g.get('nexushost', p.get('nexushost', default_nexushost )) %}
+{%- set scmhost            = g.get('scmhost', p.get('scmhost', default_scmhost )) %}
 {%- set repohost           = g.get('repohost', p.get('repohost', default_repohost )) %}
 
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
@@ -49,7 +49,7 @@
                          'source_hash'  : source_hash,
                          'prefix'       : prefix,
                          'orgdomain'    : orgdomain,
-                         'nexushost'    : nexushost,
+                         'scmhost'      : scmhost,
                          'repohost'     : repohost,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
