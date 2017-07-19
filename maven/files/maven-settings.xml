@@ -1,17 +1,17 @@
-<!-- $URL: https://myhost.{{ my_domain }}/repos/WEB/ta/trunk/maven/conf/settings.xml $ -->
-<!-- $Id: settings.xml 17 2008-06-24 15:20:49Z maven@{{ my_domain }} $  -->
+<!-- $URL: https://{{ scmhost }}.{{ domain }}/repos/WEB/ta/trunk/maven/conf/settings.xml $ -->
+<!-- $Id: settings.xml 17 2008-06-24 15:20:49Z maven@{{ domain }} $  -->
 
 <settings>
   <mirrors>
     <mirror>
-      <id>ostk-snapshot-mirror</id>
+      <id>org_snapshot-mirror</id>
       <mirrorOf>public-snapshots</mirrorOf>
-      <url>http://repository.{{ my_domain }}/content/groups/public-snapshots</url>
+      <url>http://{{ repohost }}.{{ domain }}/content/groups/public-snapshots</url>
     </mirror>
     <mirror>
-      <id>ostk-mirror</id>
+      <id>org_your_mirror</id>
       <mirrorOf>*</mirrorOf>
-      <url>http://repository.{{ my_domain }}/content/groups/public</url>
+      <url>http://{{ repohost }}.{{ domain }}/content/groups/public</url>
     </mirror>
   </mirrors>
 
