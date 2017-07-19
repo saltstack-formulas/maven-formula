@@ -24,7 +24,7 @@ maven-install-dir:
 maven-download-archive:
   cmd.run:
     - name: curl {{ maven.dl_opts }} -o '{{ archive_file }}' '{{ maven.source_url }}'
-    - unless: test -d {{ maven.maven_realcmd }}
+    - unless: test -f {{ maven.maven_realcmd }}
     - require:
       - file: maven-install-dir
     - require_in:
