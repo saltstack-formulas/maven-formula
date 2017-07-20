@@ -18,8 +18,8 @@ maven-settings:
     - template: jinja
     - makedirs: True
     - mode: 644
-    - user: root
-    - group: root
+    - user: {{ pillar['user'] }}
+    - group: {{ pillar['user'] }}
     - context:
       orgdomain: {{ maven.orgdomain }}
       scmhost: {{ maven.scmhost }}
