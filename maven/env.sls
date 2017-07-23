@@ -19,7 +19,11 @@ maven-settings:
     - makedirs: True
     - mode: 644
     - user: {{ pillar['user'] }}
+{% if salt['grains.get']('os_family') == 'Suse' %}
+    - group: users
+{% else %}
     - group: {{ pillar['user'] }}
+{% endif %}
     - context:
       orgdomain: {{ maven.orgdomain }}
       scmhost: {{ maven.scmhost }}
