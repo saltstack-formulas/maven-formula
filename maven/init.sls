@@ -19,16 +19,16 @@ maven-install-dir:
 {{ archive_file }}:
   file.absent:
     - require_in:
-      - maven-download-archive
+      - cmd: maven-download-archive
 
 maven-download-archive:
   cmd.run:
     - name: curl {{ maven.dl_opts }} -o '{{ archive_file }}' '{{ maven.source_url }}'
     - unless: test -f {{ maven.maven_realcmd }}
     - require:
-      - file: maven-install-dir
+      - file: file: maven-install-dir
     - require_in:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 
 maven-unpack-archive:
   archive.extracted:
@@ -40,7 +40,7 @@ maven-unpack-archive:
     - archive_format: {{ maven.archive_type }} 
     - user: root
     - group: root
-    - onchanges:
+    - require:
       - cmd: maven-download-archive
 
 maven-update-home-symlink:
@@ -49,20 +49,20 @@ maven-update-home-symlink:
     - target: {{ maven.maven_real_home }}
     - force: True
     - require:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 
 maven-remove-archive:
   file.absent:
     - name: {{ archive_file }}
     - require:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 
 {%- if maven.source_hash %}
 maven-remove-archive-hash:
   file.absent:
     - name: {{ archive_file }}.sha256
     - require:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 {%- endif %}
 
 {%- endif %}

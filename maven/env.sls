@@ -43,7 +43,7 @@ maven-home-alt-set:
   - name: maven-home
   - path: {{ maven.maven_real_home }}
   - require:
-    - maven-home-alt-install
+    - alternatives: maven-home-alt-install
 
 maven-alt-install:
   alternatives.install:
@@ -52,11 +52,11 @@ maven-alt-install:
     - path: {{ maven.maven_realcmd }}
     - priority: {{ maven.alt_priority }}
     - require:
-      - maven-home-alt-set
+      - alternatives: maven-home-alt-set
 
 maven-alt-set:
   alternatives.set:
   - name: maven
   - path: {{ maven.maven_realcmd }}
   - require:
-    - maven-alt-install
+    - alternatives: maven-alt-install
