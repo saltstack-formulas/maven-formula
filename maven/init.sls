@@ -20,7 +20,7 @@ maven-remove-prev-archive:
   file.absent:
     - name: {{ archive_file }}
     - require:
-      - file: file: maven-install-dir
+      - file: maven-install-dir
 
 maven-download-archive:
   cmd.run:
