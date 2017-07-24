@@ -31,11 +31,24 @@ maven-download-archive:
     - require_in:
       - archive: maven-unpack-archive
 
+{% if grains['saltversion'] <= '2016.11.6' and maven.source_hash %}
+    # See: https://github.com/saltstack/salt/pull/41914
+maven-check-archive-hash:
+  module.run:
+    - name: file.check_hash
+    - path: {{ archive_file }}
+    - file_hash: {{ maven.source_hash }}
+    - onchanges:
+      - cmd: maven-download-archive
+    - require_in:
+      - archive: maven-unpack-archive
+{%- endif %}
+
 maven-unpack-archive:
   archive.extracted:
     - name: {{ maven.prefix }}
     - source: file://{{ archive_file }}
-    {%- if maven.source_hash %}
+    {% if grains['saltversion'] > '2016.11.6' and maven.source_hash %}
     - source_hash: {{ maven.source_hash }}
     {%- endif %}
     - archive_format: {{ maven.archive_type }} 
