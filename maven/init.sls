@@ -41,6 +41,7 @@ maven-unpack-archive:
     - archive_format: {{ maven.archive_type }} 
     - user: root
     - group: root
+    - if_missing: {{ maven.maven_realcmd }}
     - require:
       - cmd: maven-download-archive
 
