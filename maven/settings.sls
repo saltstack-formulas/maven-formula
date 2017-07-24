@@ -14,6 +14,7 @@
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
 {%- set default_source_hash = default_source_url + '.sha1' %}
+{%- set default_unpack_opts = 'z' %}
 {%- set default_dl_opts    = ' -s ' %}
 {%- set default_real_home  = default_prefix + '/apache-maven-' + version %}
 {%- set default_m2_home    = default_real_home %}
@@ -35,6 +36,7 @@
 
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
+{%- set unpack_opts        = g.get('unpack_opts', p.get('unpack_opts', default_unpack_opts)) %}
 {%- set prefix             = g.get('prefix', p.get('prefix', default_prefix )) %}
 {%- set maven_real_home    = g.get('real_home', p.get('real_home', default_real_home )) %}
 {%- set maven_symlink      = g.get('symlink', p.get('symlink', default_symlink )) %}
@@ -53,6 +55,7 @@
                          'repohost'     : repohost,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
+                         'unpack_opts'  : unpack_opts,
                          'archive_type' : archive_type,
                          'maven_real_home': maven_real_home,
                          'maven_symlink': maven_symlink,

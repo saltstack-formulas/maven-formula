@@ -42,6 +42,7 @@ maven-unpack-archive:
     - user: root
     - group: root
 {% if grains['saltversion'] < '2016.11.0' %}
+    - tar_options: {{ maven.unpack_opts }}
     - if_missing: {{ maven.maven_realcmd }}
 {% endif %}
     - require:
