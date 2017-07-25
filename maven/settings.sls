@@ -13,19 +13,19 @@
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
 
-{% if grains['saltversioninfo'] <= [2016, 11, 6] %}
+{% if salt['grains.get']('saltversioninfo') <= [2016, 11, 6] %}
    ###### hash for maven3.3.9 #####
    {%- set default_source_hash = "sha1=5b4c117854921b527ab6190615f9435da730ba05" %}
 {% else %}
    {%- set default_source_hash = default_source_url + '.sha1' %}
 {% endif %}
 
-{%- set default_unpack_opts = 'z' %}
-{%- set default_dl_opts    = ' -s ' %}
-{%- set default_real_home  = default_prefix + '/apache-maven-' + version %}
-{%- set default_m2_home    = default_real_home %}
-{%- set default_symlink    = '/usr/bin/mvn' %}
-{%- set default_realcmd    = maven_home + '/bin/mvn' %}
+{%- set default_unpack_opts  = 'z' %}
+{%- set default_dl_opts      = ' -s ' %}
+{%- set default_real_home    = default_prefix + '/apache-maven-' + version %}
+{%- set default_m2_home      = default_real_home %}
+{%- set default_symlink      = '/usr/bin/mvn' %}
+{%- set default_realcmd      = maven_home + '/bin/mvn' %}
 {%- set default_alt_priority = '30' %}
 {%- set default_archive_type = 'tar' %}
 
