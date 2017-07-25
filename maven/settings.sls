@@ -1,20 +1,31 @@
 {% set p  = salt['pillar.get']('maven', {}) %}
 {% set g  = salt['grains.get']('maven', {}) %}
 
-{%- set maven_home      = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
+{%- set maven_home         = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
 
-{%- set version        = g.get('version', p.get('version', '3.3.9')) %}
-{%- set major          = version.split('.') | first %}
-{%- set mirror         = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
+{%- set version            = g.get('version', p.get('version', '3.3.9')) %}
+{%- set major              = version.split('.') | first %}
+{%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
+{%- set default_orgdomain  = 'example.com' %}
+{%- set default_scmhost    = 'scmhost' %}
+{%- set default_repohost   = 'repository' %}
 {%- set default_prefix     = '/usr/lib' %}
-{%- set default_m2_home    = default_prefix + '/apache-maven-' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
-{%- set default_source_hash = default_source_url + '.sha1' %}
-{%- set default_dl_opts    = ' -s ' %}
-{%- set default_real_home  = default_prefix + '/apache-maven-' + version %}
-{%- set default_symlink    = '/usr/bin/mvn' %}
-{%- set default_realcmd    = maven_home + '/bin/mvn' %}
+
+{% if salt['grains.get']('saltversioninfo') <= [2016, 11, 6] %}
+   ###### hash for maven3.3.9 #####
+   {%- set default_source_hash = "sha1=5b4c117854921b527ab6190615f9435da730ba05" %}
+{% else %}
+   {%- set default_source_hash = default_source_url + '.sha1' %}
+{% endif %}
+
+{%- set default_unpack_opts  = 'z' %}
+{%- set default_dl_opts      = ' -s ' %}
+{%- set default_real_home    = default_prefix + '/apache-maven-' + version %}
+{%- set default_m2_home      = default_real_home %}
+{%- set default_symlink      = '/usr/bin/mvn' %}
+{%- set default_realcmd      = maven_home + '/bin/mvn' %}
 {%- set default_alt_priority = '30' %}
 {%- set default_archive_type = 'tar' %}
 
@@ -25,8 +36,13 @@
   {%- set source_hash      = g.get('source_hash', p.get('source_hash', default_source_hash )) %}
 {%- endif %}
 
+{%- set orgdomain          = g.get('orgdomain', p.get('orgdomain', default_orgdomain )) %}
+{%- set scmhost            = g.get('scmhost', p.get('scmhost', default_scmhost )) %}
+{%- set repohost           = g.get('repohost', p.get('repohost', default_repohost )) %}
+
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
+{%- set unpack_opts        = g.get('unpack_opts', p.get('unpack_opts', default_unpack_opts)) %}
 {%- set prefix             = g.get('prefix', p.get('prefix', default_prefix )) %}
 {%- set maven_real_home    = g.get('real_home', p.get('real_home', default_real_home )) %}
 {%- set maven_symlink      = g.get('symlink', p.get('symlink', default_symlink )) %}
@@ -40,8 +56,12 @@
                          'source_url'   : source_url,
                          'source_hash'  : source_hash,
                          'prefix'       : prefix,
+                         'orgdomain'    : orgdomain,
+                         'scmhost'      : scmhost,
+                         'repohost'     : repohost,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
+                         'unpack_opts'  : unpack_opts,
                          'archive_type' : archive_type,
                          'maven_real_home': maven_real_home,
                          'maven_symlink': maven_symlink,
