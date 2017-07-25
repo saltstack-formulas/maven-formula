@@ -7,7 +7,7 @@
   {%- set archive_file = maven.prefix + '/' + maven.source_url.split('/') | last %}
 
 include:
-- env
+- maven.env
 
 maven-install-dir:
   file.directory:
