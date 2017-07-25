@@ -72,7 +72,7 @@ maven-update-home-symlink:
     - require:
       - archive: maven-unpack-archive
     - require_in:
-      - maven-home-alt-set
+      - alternatives: maven-home-alt-set
 
 maven-remove-archive:
   file.absent:
