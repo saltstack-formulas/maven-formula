@@ -6,6 +6,9 @@
 
   {%- set archive_file = maven.prefix + '/' + maven.source_url.split('/') | last %}
 
+include:
+- env
+
 maven-install-dir:
   file.directory:
     - name: {{ maven.prefix }}
@@ -68,6 +71,8 @@ maven-update-home-symlink:
     - force: True
     - require:
       - archive: maven-unpack-archive
+    - require_in:
+      - maven-home-alt-set
 
 maven-remove-archive:
   file.absent:
