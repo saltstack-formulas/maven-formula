@@ -10,10 +10,16 @@
 {%- set default_orgdomain  = 'example.com' %}
 {%- set default_scmhost    = 'scmhost' %}
 {%- set default_repohost   = 'repository' %}
-
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
-{%- set default_source_hash = default_source_url + '.sha1' %}
+
+{% if grains['saltversioninfo'] <= [2016, 11, 6] %}
+   ###### hash for maven3.3.9 #####
+   {%- set default_source_hash = "sha1=5b4c117854921b527ab6190615f9435da730ba05" %}
+{% else %}
+   {%- set default_source_hash = default_source_url + '.sha1' %}
+{% endif %}
+
 {%- set default_unpack_opts = 'z' %}
 {%- set default_dl_opts    = ' -s ' %}
 {%- set default_real_home  = default_prefix + '/apache-maven-' + version %}
