@@ -19,7 +19,7 @@ maven-install-dir:
 {{ archive_file }}:
   file.absent:
     - require_in:
-      - maven-download-archive
+      - cmd: maven-download-archive
 
 maven-download-archive:
   cmd.run:
@@ -28,18 +28,19 @@ maven-download-archive:
     - require:
       - file: maven-install-dir
     - require_in:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 
 maven-unpack-archive:
   archive.extracted:
     - name: {{ maven.prefix }}
     - source: file://{{ archive_file }}
-    {%- if maven.source_hash %}
+  {% if grains['saltversioninfo'] > [2016, 11, 6] and maven.source_hash %}
     - source_hash: {{ maven.source_hash }}
-    {%- endif %}
+  {%- endif %}
+  {% if grains['saltversioninfo'] < [2016, 11, 0] %}
+     - if_missing: {{ maven.maven_realcmd }}
+  {% endif %}
     - archive_format: {{ maven.archive_type }} 
-    - user: root
-    - group: root
     - onchanges:
       - cmd: maven-download-archive
 
@@ -49,20 +50,20 @@ maven-update-home-symlink:
     - target: {{ maven.maven_real_home }}
     - force: True
     - require:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 
 maven-remove-archive:
   file.absent:
     - name: {{ archive_file }}
     - require:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 
 {%- if maven.source_hash %}
 maven-remove-archive-hash:
   file.absent:
     - name: {{ archive_file }}.sha256
     - require:
-      - maven-unpack-archive
+      - archive: maven-unpack-archive
 {%- endif %}
 
 {%- endif %}
