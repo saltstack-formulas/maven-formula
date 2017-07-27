@@ -11,4 +11,7 @@ maven:
   symlink: /usr/bin/mvn
   realcmd: /opt/maven/bin/mvn
   alt_priority: 10000
+  orgdomain: example.com
+  scmhost: svn01
+  repohost: repository
 
