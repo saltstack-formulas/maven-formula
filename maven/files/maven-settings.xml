@@ -1,0 +1,66 @@
+<!-- $URL: https://{{ scmhost }}.{{ orgdomain }}/repos/DEV/tools/maven/conf/settings.xml $ -->
+<!-- $Id: settings.xml 17 2008-06-24 15:20:49Z maven@{{ orgdomain }} $  -->
+
+<settings>
+  <mirrors>
+    <mirror>
+      <id>org_snapshot-mirror</id>
+      <mirrorOf>public-snapshots</mirrorOf>
+      <url>http://{{ repohost }}.{{ orgdomain }}/content/groups/public-snapshots</url>
+    </mirror>
+    <mirror>
+      <id>org_your_mirror</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://{{ repohost }}.{{ orgdomain }}/content/groups/public</url>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>nexus</id>
+      <repositories>
+	<repository>
+	  <id>central</id>
+	  <url>http://central</url>
+	  <releases><enabled>true</enabled></releases>
+	  <snapshots><enabled>true</enabled></snapshots>
+	</repository>
+      </repositories>
+      <pluginRepositories>
+	<pluginRepository>
+	  <id>central</id>
+	  <url>http://central</url>
+	  <releases><enabled>true</enabled></releases>
+	  <snapshots><enabled>true</enabled></snapshots>
+	</pluginRepository>
+      </pluginRepositories>
+    </profile>
+    <profile>
+      <id>public-snapshots</id>
+      <repositories>
+	<repository>
+	  <id>public-snapshots</id>
+	  <url>http://public-snapshots</url>
+	  <releases><enabled>false</enabled></releases>
+	  <snapshots><enabled>true</enabled></snapshots>
+	</repository>
+      </repositories>
+      <pluginRepositories>
+	<pluginRepository>
+	  <id>public-snapshots</id>
+	  <url>http://public-snapshots</url>
+	  <releases><enabled>false</enabled></releases>
+	  <snapshots><enabled>true</enabled></snapshots>
+	</pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+  
+  <pluginGroups>
+    <pluginGroup>com.example.mojo</pluginGroup>
+  </pluginGroups>
+</settings>
