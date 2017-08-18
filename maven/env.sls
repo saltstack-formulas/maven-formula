@@ -29,6 +29,14 @@ maven-settings:
       scmhost: {{ maven.scmhost }}
       repohost: {{ maven.repohost }}
 
+{% if maven.archetypes != 'undefined' %}
+maven-archetypes:
+  cmd.run:
+    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
+    - require:
+      - file: maven-settings
+{% endif %}
+
 # Add maven to alternatives system
 maven-home-alt-install:
   alternatives.install:
@@ -44,6 +52,8 @@ maven-home-alt-set:
   - path: {{ maven.maven_real_home }}
   - require:
     - alternatives: maven-home-alt-install
+  - onchanges:
+    - alternatives: maven-home-alt-install
 
 maven-alt-install:
   alternatives.install:
@@ -53,10 +63,15 @@ maven-alt-install:
     - priority: {{ maven.alt_priority }}
     - require:
       - alternatives: maven-home-alt-set
+    - onchanges:
+      - alternatives: maven-home-alt-install
+      - alternatives: maven-home-alt-set
 
 maven-alt-set:
   alternatives.set:
   - name: maven
   - path: {{ maven.maven_realcmd }}
   - require:
+    - alternatives: maven-alt-install
+  - onchanges:
     - alternatives: maven-alt-install

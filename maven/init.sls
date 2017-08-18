@@ -49,19 +49,15 @@ maven-update-home-symlink:
     - force: True
     - require:
       - archive: maven-unpack-archive
+    - onchanges:
+      - archive: maven-unpack-archive
 
 maven-remove-archive:
   file.absent:
-    - name: {{ archive_file }}
+    - names:
+      - {{ archive_file }}
+      - {{ archive_file }}.sha256
     - require:
       - archive: maven-unpack-archive
-
-{%- if maven.source_hash %}
-maven-remove-archive-hash:
-  file.absent:
-    - name: {{ archive_file }}.sha256
-    - require:
-      - archive: maven-unpack-archive
-{%- endif %}
 
 {%- endif %}
