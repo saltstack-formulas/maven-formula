@@ -32,7 +32,7 @@ maven-settings:
 {% if archetypes != 'undefined' %}
 maven-archetypes:
   cmd.run:
-    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml {{ maven.archetypes }}'
+    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
     - require:
       - file: maven-settings
 {% endif %}
