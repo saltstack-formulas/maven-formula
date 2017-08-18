@@ -10,6 +10,7 @@
 {%- set default_orgdomain  = 'example.com' %}
 {%- set default_scmhost    = 'scmhost' %}
 {%- set default_repohost   = 'repository' %}
+{%- set default_archetypes = 'undefined' %}
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror + '/maven-' + major + '/' + version + '/binaries/apache-maven-' + version + '-bin.tar.gz' %}
 {%- set default_dl_opts    = ' -s ' %}
@@ -38,6 +39,7 @@
 {%- set orgdomain          = g.get('orgdomain', p.get('orgdomain', default_orgdomain )) %}
 {%- set scmhost            = g.get('scmhost', p.get('scmhost', default_scmhost )) %}
 {%- set repohost           = g.get('repohost', p.get('repohost', default_repohost )) %}
+{%- set archetypes         = g.get('archetypes', p.get('archetypes', default_archetypes )) %}
 
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
@@ -57,6 +59,7 @@
                          'orgdomain'    : orgdomain,
                          'scmhost'      : scmhost,
                          'repohost'     : repohost,
+                         'archetypes'   : archetypes,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
                          'archive_type' : archive_type,
