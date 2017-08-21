@@ -29,10 +29,10 @@ maven-settings:
       scmhost: {{ maven.scmhost }}
       repohost: {{ maven.repohost }}
 
-{% if maven.archetypes != 'undefined' %}
+{% if maven.mvn_archetypes != 'undefined' %}
 maven-archetypes:
   cmd.run:
-    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
+    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml '{{ maven.mvn_archetypes }}'
     - require:
       - file: maven-settings
 {% endif %}
