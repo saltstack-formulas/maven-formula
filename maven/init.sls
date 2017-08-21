@@ -52,7 +52,6 @@ maven-unpack-archive:
     - source_hash: {{ maven.source_hash }}
   {%- endif %}
   {% if grains['saltversioninfo'] < [2016, 11, 0] %}
-    - tar_options: {{ maven.unpack_opts }}
     - if_missing: {{ maven.maven_realcmd }}
   {% endif %}
     - archive_format: {{ maven.archive_type }} 
