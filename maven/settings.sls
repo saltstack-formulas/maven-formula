@@ -39,7 +39,7 @@
 {%- set orgdomain          = g.get('orgdomain', p.get('orgdomain', default_orgdomain )) %}
 {%- set scmhost            = g.get('scmhost', p.get('scmhost', default_scmhost )) %}
 {%- set repohost           = g.get('repohost', p.get('repohost', default_repohost )) %}
-{%- set mvn_archetypes     = g.get('archetypes', p.get('archetypes', default_archetypes )) %}
+{%- set archetypes         = g.get('archetypes', p.get('archetypes', default_archetypes )) %}
 
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
@@ -59,7 +59,7 @@
                          'orgdomain'      : orgdomain,
                          'scmhost'        : scmhost,
                          'repohost'       : repohost,
-                         'mvn_archetypes' : archetypes,
+                         'archetypes'     : archetypes,
                          'm2_home'        : m2_home,
                          'dl_opts'        : dl_opts,
                          'archive_type'   : archive_type,
