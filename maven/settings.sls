@@ -64,7 +64,7 @@
                          'dl_opts'        : dl_opts,
                          'archive_type'   : archive_type,
                          'maven_real_home': maven_real_home,
-                         'maven_symlink': maven_symlink,
-                         'maven_realcmd': maven_realcmd,
-                         'alt_priority' : alt_priority,
+                         'maven_symlink'  : maven_symlink,
+                         'maven_realcmd'  : maven_realcmd,
+                         'alt_priority'   : alt_priority,
                      }) %}
