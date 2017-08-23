@@ -25,8 +25,24 @@ maven-remove-prev-archive:
 maven-download-archive:
   cmd.run:
     - name: curl {{ maven.dl_opts }} -o '{{ archive_file }}' '{{ maven.source_url }}'
+    - unless: test -f {{ maven.maven_realcmd }}
     - require:
       - file: maven-remove-prev-archive
+    - require_in:
+      - archive: maven-unpack-archive
+
+{% if grains['saltversioninfo'] <= [2016, 11, 6] and maven.source_hash %}
+    # See: https://github.com/saltstack/salt/pull/41914
+maven-check-archive-hash:
+  module.run:
+    - name: file.check_hash
+    - path: {{ archive_file }}
+    - file_hash: {{ maven.source_hash }}
+    - onchanges:
+      - cmd: maven-download-archive
+    - require_in:
+      - archive: maven-unpack-archive
+{%- endif %}
 
 maven-unpack-archive:
   archive.extracted:
@@ -51,6 +67,8 @@ maven-update-home-symlink:
       - archive: maven-unpack-archive
     - onchanges:
       - archive: maven-unpack-archive
+    - require_in:
+      - alternatives: maven-home-alt-set
 
 maven-remove-archive:
   file.absent:

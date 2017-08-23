@@ -50,8 +50,6 @@ maven-home-alt-set:
   alternatives.set:
   - name: maven-home
   - path: {{ maven.maven_real_home }}
-  - require:
-    - alternatives: maven-home-alt-install
   - onchanges:
     - alternatives: maven-home-alt-install
 
@@ -61,17 +59,12 @@ maven-alt-install:
     - link: {{ maven.maven_symlink }}
     - path: {{ maven.maven_realcmd }}
     - priority: {{ maven.alt_priority }}
-    - require:
-      - alternatives: maven-home-alt-set
     - onchanges:
-      - alternatives: maven-home-alt-install
       - alternatives: maven-home-alt-set
 
 maven-alt-set:
   alternatives.set:
   - name: maven
   - path: {{ maven.maven_realcmd }}
-  - require:
-    - alternatives: maven-alt-install
   - onchanges:
     - alternatives: maven-alt-install
