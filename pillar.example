@@ -9,7 +9,7 @@ maven:
   archive_type: tar
   real_home: /user/lib/apache-maven-3.3.9
   symlink: /usr/bin/mvn
-  realcmd: /opt/maven/bin/mvn
+  realcmd: /user/lib/apache-maven-3.3.9/bin/mvn
   alt_priority: 10000
   orgdomain: example.com
   scmhost: svn01
