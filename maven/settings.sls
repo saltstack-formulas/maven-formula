@@ -1,11 +1,11 @@
 {% set p  = salt['pillar.get']('maven', {}) %}
 {% set g  = salt['grains.get']('maven', {}) %}
 
-{%- set maven_home      = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
+{%- set maven_home         = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
 
-{%- set version        = g.get('version', p.get('version', '3.3.9')) %}
-{%- set major          = version.split('.') | first %}
-{%- set mirror         = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
+{%- set version            = g.get('version', p.get('version', '3.3.9')) %}
+{%- set major              = version.split('.') | first %}
+{%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
 {%- set default_orgdomain  = 'example.com' %}
 {%- set default_scmhost    = 'scmhost' %}
@@ -40,7 +40,6 @@
 {%- set scmhost            = g.get('scmhost', p.get('scmhost', default_scmhost )) %}
 {%- set repohost           = g.get('repohost', p.get('repohost', default_repohost )) %}
 {%- set archetypes         = g.get('archetypes', p.get('archetypes', default_archetypes )) %}
-
 {%- set m2_home            = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts            = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
 {%- set prefix             = g.get('prefix', p.get('prefix', default_prefix )) %}
