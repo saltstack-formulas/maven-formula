@@ -4,7 +4,7 @@ maven:
   source_url: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
   source_hash: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz.sha1
   prefix: /usr/lib
-  m2_home: /usr/lib/apache-maven
+  m2_home: /user/lib/apache-maven-3.3.9
   dl_opts: -s
   archive_type: tar
   real_home: /user/lib/apache-maven-3.3.9
