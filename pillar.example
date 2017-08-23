@@ -7,7 +7,7 @@ maven:
   m2_home: /usr/lib/apache-maven
   dl_opts: -s
   archive_type: tar
-  real_home: /opt/maven
+  real_home: /user/lib/apache-maven-3.3.9
   symlink: /usr/bin/mvn
   realcmd: /opt/maven/bin/mvn
   alt_priority: 10000
