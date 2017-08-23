@@ -5,12 +5,12 @@ maven:
   ##source_hash: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz.sha1
   source_hash: sha1=5b4c117854921b527ab6190615f9435da730ba05
   prefix: /usr/lib
-  m2_home: /user/lib/apache-maven-3.3.9
+  m2_home: /usr/lib/apache-maven-3.3.9
   dl_opts: -s
   archive_type: tar
-  real_home: /user/lib/apache-maven-3.3.9
+  real_home: /usr/lib/apache-maven-3.3.9
   symlink: /usr/bin/mvn
-  realcmd: /user/lib/apache-maven-3.3.9/bin/mvn
+  realcmd: /usr/lib/apache-maven-3.3.9/bin/mvn
   alt_priority: 10000
   orgdomain: example.com
   scmhost: svn01
