@@ -15,4 +15,7 @@ maven:
   scmhost: svn01
   repohost: repository
   archetypes: http://repository.example.com/content/repositories/releases/archetype-catalog.xml
+  users:
+    - john
+    - jenkins
 

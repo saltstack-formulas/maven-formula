@@ -49,6 +49,12 @@
 {%- set maven_realcmd      = g.get('realcmd', p.get('realcmd', default_realcmd )) %}
 {%- set alt_priority       = g.get('alt_priority', p.get('alt_priority', default_alt_priority )) %}
 {%- set archive_type       = g.get('archive_type', p.get('archive_type', default_archive_type )) %}
+{%- set users_raw          = p.get('users', []) %}
+{%- if users_raw is string %}
+{%- set users              = [users_raw] %} 
+{%- else %}
+{%- set users              = users_raw %} 
+{%- endif %}
 
 {%- set maven = {} %}
 {%- do maven.update( {   'version'      : version,
@@ -67,4 +73,6 @@
                          'maven_symlink': maven_symlink,
                          'maven_realcmd': maven_realcmd,
                          'alt_priority' : alt_priority,
+                         'users'        : users,
                      }) %}
+

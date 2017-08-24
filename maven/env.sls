@@ -11,32 +11,6 @@ maven-config:
     - context:
       m2_home: {{ maven.m2_home }}
 
-maven-settings:
-  file.managed:
-    - name: /home/{{ pillar['user'] }}/.m2/settings.xml
-    - source: salt://maven/files/maven-settings.xml
-    - template: jinja
-    - makedirs: True
-    - mode: 644
-    - user: {{ pillar['user'] }}
-{% if salt['grains.get']('os_family') == 'Suse' or salt['grains.get']('os') == 'SUSE' %}
-    - group: users
-{% else %}
-    - group: {{ pillar['user'] }}
-{% endif %}
-    - context:
-      orgdomain: {{ maven.orgdomain }}
-      scmhost: {{ maven.scmhost }}
-      repohost: {{ maven.repohost }}
-
-{% if maven.archetypes != 'undefined' %}
-maven-archetypes:
-  cmd.run:
-    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
-    - require:
-      - file: maven-settings
-{% endif %}
-
 # Add maven to alternatives system
 maven-home-alt-install:
   alternatives.install:
