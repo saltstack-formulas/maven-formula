@@ -30,11 +30,11 @@
 {%- set default_alt_priority = '30' %}
 {%- set default_archive_type = 'tar' %}
 
-{%- set source_url         = g.get('source_url', p.get('source_url', default_source_url)) %}
+{%- set source_url    = g.get('source_url', p.get('source_url', default_source_url)) %}
 {%- if source_url == default_source_url %}
-  {%- set source_hash      = default_source_hash %}
+  {%- set source_hash = default_source_hash %}
 {%- else %}
-  {%- set source_hash      = g.get('source_hash', p.get('source_hash', default_source_hash )) %}
+  {%- set source_hash = g.get('source_hash', p.get('source_hash', default_source_hash )) %}
 {%- endif %}
 
 {%- set user          = g.get('default_user', salt['pillar.get']('default_user', p.get('default_user', default_user))%}
