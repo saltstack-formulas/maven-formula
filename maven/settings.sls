@@ -7,7 +7,7 @@
 {%- set major              = version.split('.') | first %}
 {%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
-{%- set default_user       = 'undefined' %}
+{%- set default_user       = 'undefined_user' %}
 {%- set default_orgdomain  = 'example.com' %}
 {%- set default_scmhost    = 'scmhost' %}
 {%- set default_repohost   = 'repository' %}

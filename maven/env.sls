@@ -12,7 +12,7 @@ maven-config:
       m2_home: {{ maven.m2_home }}
 
 ### Primary user environment support ##
-{% if maven.user != 'undefined' %}
+{% if maven.user != 'undefined_user' %}
 
 maven-settings:
   file.managed:
