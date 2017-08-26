@@ -11,30 +11,45 @@ maven-config:
     - context:
       m2_home: {{ maven.m2_home }}
 
+### Primary user environment support ##
+{% if maven.user != 'undefined' %}
+
 maven-settings:
   file.managed:
-    - name: /home/{{ pillar['user'] }}/.m2/settings.xml
+    - name: /home/{{ maven.user }}/.m2/settings.xml
     - source: salt://maven/files/maven-settings.xml
     - template: jinja
     - makedirs: True
     - mode: 644
-    - user: {{ pillar['user'] }}
-{% if salt['grains.get']('os_family') == 'Suse' or salt['grains.get']('os') == 'SUSE' %}
+    - user: {{ maven.user }}
+  {% if salt['grains.get']('os_family') == 'Suse' or salt['grains.get']('os') == 'SUSE' %}
     - group: users
-{% else %}
-    - group: {{ pillar['user'] }}
-{% endif %}
+  {% else %}
+    - group: {{ maven.user }}
+  {% endif %}
     - context:
       orgdomain: {{ maven.orgdomain }}
       scmhost: {{ maven.scmhost }}
       repohost: {{ maven.repohost }}
 
-{% if maven.archetypes != 'undefined' %}
+  {% if maven.archetypes != 'undefined' %}
 maven-archetypes:
   cmd.run:
-    - name: curl {{ maven.dl_opts }} -o /home/{{ pillar['user'] }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
+    - name: curl {{ maven.dl_opts }} -o /home/{{ maven.user }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
     - require:
       - file: maven-settings
+  file.managed:
+    - name: /home/{{ maven.user }}/.m2/archetype-catalog.xml
+    - replace: False
+    - mode: 644
+    - user: {{ maven.user }}
+     {% if salt['grains.get']('os_family') == 'Suse' or salt['grains.get']('os') == 'SUSE' %}
+    - group: users
+     {% else %}
+    - group: {{ maven.user }}
+     {% endif %}
+  {% endif %}
+
 {% endif %}
 
 # Add maven to alternatives system
@@ -42,14 +57,14 @@ maven-home-alt-install:
   alternatives.install:
     - name: maven-home
     - link: {{ maven.maven_home }}
-    - path: {{ maven.maven_real_home }}
+    - path: {{ maven.real_home }}
     - priority: {{ maven.alt_priority }} 
 
 # Set maven alternatives
 maven-home-alt-set:
   alternatives.set:
   - name: maven-home
-  - path: {{ maven.maven_real_home }}
+  - path: {{ maven.real_home }}
   - require:
     - alternatives: maven-home-alt-install
   - onchanges:
@@ -58,8 +73,8 @@ maven-home-alt-set:
 maven-alt-install:
   alternatives.install:
     - name: maven
-    - link: {{ maven.maven_symlink }}
-    - path: {{ maven.maven_realcmd }}
+    - link: {{ maven.symlink }}
+    - path: {{ maven.realcmd }}
     - priority: {{ maven.alt_priority }}
     - require:
       - alternatives: maven-home-alt-set
@@ -70,7 +85,7 @@ maven-alt-install:
 maven-alt-set:
   alternatives.set:
   - name: maven
-  - path: {{ maven.maven_realcmd }}
+  - path: {{ maven.realcmd }}
   - require:
     - alternatives: maven-alt-install
   - onchanges:
