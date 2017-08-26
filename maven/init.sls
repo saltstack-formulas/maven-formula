@@ -36,7 +36,7 @@ maven-unpack-archive:
     - source_hash: {{ maven.source_hash }}
   {%- endif %}
   {% if grains['saltversioninfo'] < [2016, 11, 0] %}
-    - if_missing: {{ maven.maven_realcmd }}
+    - if_missing: {{ maven.realcmd }}
   {% endif %}
     - archive_format: {{ maven.archive_type }} 
     - onchanges:
@@ -45,7 +45,7 @@ maven-unpack-archive:
 maven-update-home-symlink:
   file.symlink:
     - name: {{ maven.maven_home }}
-    - target: {{ maven.maven_real_home }}
+    - target: {{ maven.real_home }}
     - force: True
     - require:
       - archive: maven-unpack-archive
