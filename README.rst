@@ -29,4 +29,4 @@ Adds /etc/profile.d/apache-maven.sh, setting M2_HOME and M2_HOME/bin to the PATH
 
 Please see the pillar.example for configuration.
 
-Tested on RedHat/CentOS 5.X or RedHat/CentOS 6.X, AmazonOS, Ubuntu, and Fedora.
+Tested on RedHat/CentOS 5.X or RedHat/CentOS 6.X, AmazonOS, Ubuntu, Suse, Arch, and Fedora.
