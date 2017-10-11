@@ -38,6 +38,12 @@ maven-archetypes:
     - name: curl {{ maven.dl_opts }} -o /home/{{ maven.user }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
     - require:
       - file: maven-settings
+    {% if grains['saltversioninfo'] >= [2017, 7, 0] %}
+    - retry:
+        attempts: {{ maven.dl_retries }}
+        interval: 60
+        splay: 10
+    {% endif %}
   file.managed:
     - name: /home/{{ maven.user }}/.m2/archetype-catalog.xml
     - replace: False
