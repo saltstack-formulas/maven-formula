@@ -1,7 +1,7 @@
 maven_home: /opt/maven
-#default_user: undefined_user
+#default_user:
 maven:
-  #default_user: undefined_user
+  #default_user:
   version: 3.3.9
   source_url: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
   ##source_hash: http://www.us.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz.sha1
@@ -17,5 +17,5 @@ maven:
   orgdomain: example.com
   scmhost: svn01
   repohost: repository
-  archetypes: http://repository.example.com/content/repositories/releases/archetype-catalog.xml
+  #archetypes: http://repository.example.com/content/repositories/releases/archetype-catalog.xml
 

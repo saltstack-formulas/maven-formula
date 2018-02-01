@@ -12,7 +12,7 @@ maven-config:
       m2_home: {{ maven.m2_home }}
 
 ### Primary user environment support ##
-{% if maven.user != 'undefined_user' %}
+{% if maven.user %}
 
 maven-settings:
   file.managed:
@@ -22,17 +22,15 @@ maven-settings:
     - makedirs: True
     - mode: 644
     - user: {{ maven.user }}
-  {% if salt['grains.get']('os_family') == 'Suse' or salt['grains.get']('os') == 'SUSE' %}
-    - group: users
-  {% else %}
-    - group: {{ maven.user }}
-  {% endif %}
+       {% if maven.group and grains.os not in ('MacOS',) %}
+    - group: {{ maven.group }}
+       {% endif %}
     - context:
       orgdomain: {{ maven.orgdomain }}
       scmhost: {{ maven.scmhost }}
       repohost: {{ maven.repohost }}
 
-  {% if maven.archetypes != 'undefined' %}
+  {% if maven.archetypes %}
 maven-archetypes:
   cmd.run:
     - name: curl {{ maven.dl_opts }} -o /home/{{ maven.user }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
@@ -43,11 +41,9 @@ maven-archetypes:
     - replace: False
     - mode: 644
     - user: {{ maven.user }}
-     {% if salt['grains.get']('os_family') == 'Suse' or salt['grains.get']('os') == 'SUSE' %}
-    - group: users
-     {% else %}
-    - group: {{ maven.user }}
-     {% endif %}
+       {% if maven.group and grains.os not in ('MacOS',) %}
+    - group: {{ maven.group }}
+       {% endif %}
   {% endif %}
 
 {% endif %}
