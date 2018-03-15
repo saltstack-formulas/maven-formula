@@ -16,6 +16,8 @@
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror ~ '/maven-' ~ major ~ '/' ~ version ~ '/binaries/apache-maven-' ~ version ~ '-bin.tar.gz' %}
 {%- set default_dl_opts    = ' -s ' %}
+{%- set default_dl_retries = '1' %}
+{%- set default_dl_interval = '60' %}
 {%- set default_real_home  = default_prefix ~ '/apache-maven-' ~ version %}
 {%- set default_m2_home    = default_real_home %}
 {%- set default_symlink    = '/usr/bin/mvn' %}
@@ -52,6 +54,8 @@
 
 {%- set m2_home       = g.get('m2_home', p.get('m2_home', default_m2_home )) %}
 {%- set dl_opts       = g.get('dl_opts', p.get('dl_opts', default_dl_opts)) %}
+{%- set dl_retries    = g.get('dl_retries', p.get('dl_retries', default_dl_retries)) %}
+{%- set dl_interval   = g.get('dl_interval', p.get('dl_interval', default_dl_interval)) %}
 {%- set prefix        = g.get('prefix', p.get('prefix', default_prefix )) %}
 {%- set real_home     = g.get('real_home', p.get('real_home', default_real_home )) %}
 {%- set symlink       = g.get('symlink', p.get('symlink', default_symlink )) %}
@@ -73,6 +77,8 @@
                          'archetypes'   : archetypes,
                          'm2_home'      : m2_home,
                          'dl_opts'      : dl_opts,
+                         'dl_retries'   : dl_retries,
+                         'dl_interval'  : dl_interval,
                          'archive_type' : archive_type,
                          'real_home'    : real_home,
                          'symlink'      : symlink,

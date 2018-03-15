@@ -27,6 +27,11 @@ maven-download-archive:
     - name: curl {{ maven.dl_opts }} -o '{{ archive_file }}' '{{ maven.source_url }}'
     - require:
       - file: maven-remove-prev-archive
+    {% if grains['saltversioninfo'] >= [2017, 7, 0] %}
+    - retry:
+        attempts: {{ maven.dl_retries }}
+        interval: {{ maven.dl_interval }}
+    {% endif %}
 
 maven-unpack-archive:
   archive.extracted:
