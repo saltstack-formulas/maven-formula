@@ -7,11 +7,12 @@
 {%- set major              = version.split('.') | first %}
 {%- set mirror             = g.get('mirror', p.get('mirror', 'http://www.us.apache.org/dist/maven' )) %}
 
-{%- set default_user       = 'undefined_user' %}
+{%- set default_user       = None %}
+{%- set default_group      = None %}
 {%- set default_orgdomain  = 'example.com' %}
 {%- set default_scmhost    = 'scmhost' %}
 {%- set default_repohost   = 'repository' %}
-{%- set default_archetypes = 'undefined' %}
+{%- set default_archetypes = None %}
 {%- set default_prefix     = '/usr/lib' %}
 {%- set default_source_url = mirror ~ '/maven-' ~ major ~ '/' ~ version ~ '/binaries/apache-maven-' ~ version ~ '-bin.tar.gz' %}
 {%- set default_dl_opts    = ' -s ' %}
@@ -37,7 +38,13 @@
   {%- set source_hash = g.get('source_hash', p.get('source_hash', default_source_hash )) %}
 {%- endif %}
 
-{%- set user          = g.get('default_user', salt['pillar.get']('default_user', p.get('default_user', default_user)))%}
+# Get user's group name from pillar or 'id' command
+{%- set user  = g.get('default_user', salt['pillar.get']('default_user', p.get('default_user', default_user)))%}
+{%- set group = g.get('default_group', salt['pillar.get']('default_group', p.get('default_group', default_group)))%}
+{%- if not group %}
+  {%- set group = salt['cmd.run']('id -gn', runas=user, output_loglevel='quiet',) or None %}
+{% endif %}
+
 {%- set orgdomain     = g.get('orgdomain', p.get('orgdomain', default_orgdomain )) %}
 {%- set scmhost       = g.get('scmhost', p.get('scmhost', default_scmhost )) %}
 {%- set repohost      = g.get('repohost', p.get('repohost', default_repohost )) %}
@@ -59,6 +66,7 @@
                          'source_hash'  : source_hash,
                          'prefix'       : prefix,
                          'user'         : user,
+                         'group'        : group,
                          'orgdomain'    : orgdomain,
                          'scmhost'      : scmhost,
                          'repohost'     : repohost,
