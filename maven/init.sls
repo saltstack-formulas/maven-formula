@@ -10,7 +10,9 @@ maven-install-dir:
   file.directory:
     - name: {{ maven.prefix }}
     - user: root
-    - group: root
+       {% if maven.group and grains.os not in ('MacOS',) %}
+    - group: {{ maven.group }}
+       {% endif %}
     - mode: 755
     - makedirs: True
 

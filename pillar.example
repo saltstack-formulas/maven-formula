@@ -1,5 +1,6 @@
 maven_home: /opt/maven
 #default_user:
+
 maven:
   #default_user:
   version: 3.3.9

@@ -1,7 +1,12 @@
 {% set p  = salt['pillar.get']('maven', {}) %}
 {% set g  = salt['grains.get']('maven', {}) %}
 
-{%- set maven_home         = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
+{%- set maven_home = salt['grains.get']('maven_home', salt['pillar.get']('maven_home', '/opt/maven' )) %}
+
+{% set users_home = salt['grains.get']('users_home', salt['pillar.get']('users_home', '/home' )) %}
+{% if grains.os == 'MacOS' %}
+   {% set users_home = '/Users' %}
+{% endif %}
 
 {%- set version            = g.get('version', p.get('version', '3.3.9')) %}
 {%- set major              = version.split('.') | first %}
@@ -13,7 +18,7 @@
 {%- set default_scmhost    = 'scmhost' %}
 {%- set default_repohost   = 'repository' %}
 {%- set default_archetypes = None %}
-{%- set default_prefix     = '/usr/lib' %}
+{%- set default_prefix     = '/usr/local/lib' %}
 {%- set default_source_url = mirror ~ '/maven-' ~ major ~ '/' ~ version ~ '/binaries/apache-maven-' ~ version ~ '-bin.tar.gz' %}
 {%- set default_dl_opts    = ' -s ' %}
 {%- set default_dl_retries = '1' %}
@@ -30,7 +35,7 @@
    {%- set default_source_hash = default_source_url ~ '.sha1' %}
 {% endif %}
 
-{%- set default_alt_priority = '30' %}
+{%- set default_alt_priority = '0' %}
 {%- set default_archive_type = 'tar' %}
 
 {%- set source_url    = g.get('source_url', p.get('source_url', default_source_url)) %}
@@ -66,6 +71,7 @@
 {%- set maven = {} %}
 {%- do maven.update( {   'version'      : version,
                          'maven_home'   : maven_home,
+                         'users_home'   : users_home,
                          'source_url'   : source_url,
                          'source_hash'  : source_hash,
                          'prefix'       : prefix,

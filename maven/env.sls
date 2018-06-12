@@ -7,7 +7,9 @@ maven-config:
     - template: jinja
     - mode: 644
     - user: root
-    - group: root
+       {% if maven.group and grains.os not in ('MacOS',) %}
+    - group: {{ maven.group }}
+       {% endif %}
     - context:
       m2_home: {{ maven.m2_home }}
 
@@ -16,7 +18,7 @@ maven-config:
 
 maven-settings:
   file.managed:
-    - name: /home/{{ maven.user }}/.m2/settings.xml
+    - name: {{ maven.users_home }}/{{ maven.user }}/.m2/settings.xml
     - source: salt://maven/files/maven-settings.xml
     - template: jinja
     - makedirs: True
@@ -33,7 +35,7 @@ maven-settings:
   {% if maven.archetypes %}
 maven-archetypes:
   cmd.run:
-    - name: curl {{ maven.dl_opts }} -o /home/{{ maven.user }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
+    - name: curl {{ maven.dl_opts }} -o {{ maven.users_home }}/{{ maven.user }}/.m2/archetype-catalog.xml '{{ maven.archetypes }}'
     - require:
       - file: maven-settings
     {% if grains['saltversioninfo'] >= [2017, 7, 0] %}
@@ -43,7 +45,7 @@ maven-archetypes:
         splay: 10
     {% endif %}
   file.managed:
-    - name: /home/{{ maven.user }}/.m2/archetype-catalog.xml
+    - name: {{ maven.users_home }}/{{ maven.user }}/.m2/archetype-catalog.xml
     - replace: False
     - mode: 644
     - user: {{ maven.user }}
@@ -54,7 +56,9 @@ maven-archetypes:
 
 {% endif %}
 
-# Add maven to alternatives system
+# Alternatives system. Make binaries available in $PATH
+{%- if maven.alt_priority and grains.os not in ('Arch', 'MacOS',) %}
+
 maven-home-alt-install:
   alternatives.install:
     - name: maven-home
@@ -92,3 +96,5 @@ maven-alt-set:
     - alternatives: maven-alt-install
   - onchanges:
     - alternatives: maven-alt-install
+
+{% endif %}
