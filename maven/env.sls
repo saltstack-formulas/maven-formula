@@ -5,6 +5,7 @@ maven-config:
     - name: /etc/profile.d/apache-maven.sh
     - source: salt://maven/files/apache-maven.sh
     - template: jinja
+    - makedirs: True
     - mode: 644
     - user: root
        {% if maven.group and grains.os not in ('MacOS',) %}
