@@ -1,0 +1,9 @@
+########################################################################
+# File managed by Salt at <{{ source }}>.
+# Your changes may be overwritten.
+########################################################################
+
+export M2_HOME={{ path }}
+export M2={{ path }}/bin
+export PATH=${PATH}:${M2}
+{{ '' if not environ else environ|yaml(False) }}

@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
 
+    {%- if grains.kernel|lower in ('linux', 'darwin',) %}
+
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import maven with context %}
 
-    {%- if grains.kernel|lower in ('linux', 'darwin',) %}
-
 include:
-  - .{{ 'package' if maven.pkg.use_upstream_package else 'archive' }}
-  - .config
-  - .linuxenv
+  - .{{ 'package' if maven.pkg.use_upstream_package else 'archive' }}.clean
+  - .config.clean
+  - .linuxenv.clean
 
     {%- else %}
 
