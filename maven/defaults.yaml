@@ -1,0 +1,56 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+maven:
+  version: 3.6.3
+  release: maven-3
+  command: /bin/mvn
+
+  environ_file: /etc/default/maven.sh
+  environ: []
+  config_file: /undefined_user/.m2/settings.xml
+  config:
+    orgdomain: example.com
+    scmhost: scmhost
+    repohost: repository
+  archetypes_file: undefined_user/.m2/archetype-catalog.xml
+  archetypes_url: None
+
+  pkg:
+    name: apache-maven
+    use_upstream_archive: true
+    use_upstream_package: true
+    use_upstream_source: false
+    deps:
+      - curl
+      - gzip
+    suffix: tar.gz
+    uri: http://www.us.apache.org/dist/maven
+    archive:
+      name: None
+      source_hash: 26ad91d751b3a9a53087aefa743f4e16a17741d3915b219cf74112bf87a438c5
+
+  dir:
+    archive: /usr/local
+    homes: /home
+    tmp: /tmp/apache/maven
+
+  linux:
+    symlink: /usr/local/bin/mvn
+    altpriority: 0
+    # On freedesktop.org-compliant desktops, enable Icon on Linux launchers.
+    # Place a .desktop file in e.g. /usr/share/applications
+    install_desktop_file: true
+    desktop_file: /usr/share/applications/maven.desktop
+
+  identity:
+    rootuser: root
+    rootgroup: root
+    user: undefined_user
+
+  retry_option:
+    # https://docs.saltstack.com/en/latest/ref/states/requisites.html#retrying-states
+    attempts: 2
+    until: true
+    interval: 10
+    splay: 10

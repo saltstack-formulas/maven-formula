@@ -3,10 +3,13 @@
 
     {%- if grains.kernel|lower in ('linux', 'darwin',) %}
 
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import maven with context %}
+
 include:
   - .{{ 'package' if maven.pkg.use_upstream_package else 'archive' }}
-  - .config
-  - .linuxenv
+  - .config.clean
+  - .linuxenv.clean
 
     {%- else %}
 

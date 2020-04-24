@@ -13,7 +13,7 @@ maven:
   archetypes_file: .m2/archetype-catalog.xml
   archetypes_url: None
   identity:
-    user: undefined_user
+    user: root
   pkg:
     use_upstream_archive: true
     use_upstream_package: false
