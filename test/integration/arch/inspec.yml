@@ -5,7 +5,7 @@ name: arch
 title: maven formula
 maintainer: SaltStack Formulas
 license: Apache-2.0
-summary: Verify that the maven formula is setup and configured correctly
+summary: Verify that the maven formula is setup and configured correctly (on Arch Linux)
 supports:
   - platform-name: debian
   - platform-name: ubuntu
