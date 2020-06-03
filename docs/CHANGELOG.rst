@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`1.0.1 <https://github.com/saltstack-formulas/maven-formula/compare/v1.0.0...v1.0.1>`_ (2020-06-03)
+-------------------------------------------------------------------------------------------------------
+
+Documentation
+^^^^^^^^^^^^^
+
+
+* **readme:** fix, and style updates (\ `ae92d5f <https://github.com/saltstack-formulas/maven-formula/commit/ae92d5f000345895e569c6b6287eb7860810100c>`_\ )
+
 `1.0.0 <https://github.com/saltstack-formulas/maven-formula/compare/v0.4.0...v1.0.0>`_ (2020-06-02)
 -------------------------------------------------------------------------------------------------------
 
