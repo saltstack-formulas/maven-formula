@@ -55,7 +55,7 @@ Available states
    :local:
 
 ``maven``
-^^^^^^^
+^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
@@ -64,28 +64,28 @@ manages Maven configuration file and then
 configures the development environment.
 
 ``maven.archive``
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 This state will install Maven from archive only.
 
 ``maven.package``
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 This state will install Maven homebrew package on MacOS.
 
 ``maven.config``
-^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 This state will configure npmrc and/or environment and has a dependency on ``maven.install``
 via include list.
 
 ``maven.linuxenv``
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 This state will install some Maven linux-alternatives on GNU/Linux.
 
 ``maven.clean``
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 *Meta-state (This is a state that includes other states)*.
 
@@ -94,25 +94,25 @@ removes the configuration file and
 then uninstalls the package.
 
 ``maven.config.clean``
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 This state will remove the configuration of Maven and has a
 dependency on ``maven.package.clean`` via include list.
 
 ``maven.archive.clean``
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 This state will remove Maven package and has a dependency on
 ``maven.config.clean`` via include list.
 
-``maven.package``
-^^^^^^^^^^^^^^^
+``maven.package.clean``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 This state will remove Maven package on MacOS, and has dependency on
 ``maven.config.clean`` via include list.
 
 ``maven.linuxenv.clean``
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 This state will remove Maven linux-alternatives on GNU/Linux.
 
