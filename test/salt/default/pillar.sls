@@ -2,7 +2,7 @@
 # vim: ft=yaml
 ---
 maven:
-  version: 3.3.9
+  version: 3.8.0
   release: maven-3
 
   config_file: .m2/settings.xml
@@ -19,7 +19,7 @@ maven:
     use_upstream_package: false
     uri: http://www.us.apache.org/dist/maven
     archive:
-      source_hash: sha1=5b4c117854921b527ab6190615f9435da730ba05
+      source_hash: sha1=62a783cbf1b4fb9664f9accf7a16ae2488dcb61c
   dir:
     archive: /usr/local/lib
   linux:

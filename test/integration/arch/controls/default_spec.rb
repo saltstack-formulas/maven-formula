@@ -9,7 +9,7 @@ control 'maven archive' do
   describe file('/etc/default/maven.sh') do
     it { should exist }
   end
-  describe file('/usr/local/lib/apache-maven-3.3.9/bin/mvn') do
+  describe file('/usr/local/lib/apache-maven-3.8.0/bin/mvn') do
     it { should exist }
   end
   describe file('/usr/local/bin/mvn') do
