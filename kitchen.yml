@@ -316,6 +316,7 @@ suites:
       state_top:
         base:
           '*':
+            - maven._mapdata
             - maven.clean
             - maven
       pillars:
@@ -337,6 +338,7 @@ suites:
       state_top:
         base:
           '*':
+            - maven._mapdata
             - maven.clean
             - maven
       pillars:
