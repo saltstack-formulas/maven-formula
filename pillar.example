@@ -2,7 +2,7 @@
 # vim: ft=yaml
 ---
 maven:
-  version: 3.8.0
+  version: 3.8.1
   release: maven-3
 
   config_file: .m2/settings.xml
@@ -19,7 +19,8 @@ maven:
     use_upstream_package: false
     uri: http://www.us.apache.org/dist/maven
     archive:
-      source_hash: sha1=62a783cbf1b4fb9664f9accf7a16ae2488dcb61c
+      # yamllint disable-line rule:line-length
+      source_hash: 0ec48eb515d93f8515d4abe465570dfded6fa13a3ceb9aab8031428442d9912ec20f066b2afbf56964ffe1ceb56f80321b50db73cf77a0e2445ad0211fb8e38d
   dir:
     archive: /usr/local/lib
   linux:
