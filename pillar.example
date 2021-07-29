@@ -17,7 +17,7 @@ maven:
   pkg:
     use_upstream_archive: true
     use_upstream_package: false
-    uri: http://www.us.apache.org/dist/maven
+    uri: http://www.apache.org/dist/maven
     archive:
       # yamllint disable-line rule:line-length
       source_hash: 0ec48eb515d93f8515d4abe465570dfded6fa13a3ceb9aab8031428442d9912ec20f066b2afbf56964ffe1ceb56f80321b50db73cf77a0e2445ad0211fb8e38d
