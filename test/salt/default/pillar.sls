@@ -2,7 +2,7 @@
 # vim: ft=yaml
 ---
 maven:
-  version: 3.8.1
+  version: 3.8.3
   release: maven-3
 
   config_file: .m2/settings.xml
@@ -20,7 +20,7 @@ maven:
     uri: http://www.apache.org/dist/maven
     archive:
       # yamllint disable-line rule:line-length
-      source_hash: 0ec48eb515d93f8515d4abe465570dfded6fa13a3ceb9aab8031428442d9912ec20f066b2afbf56964ffe1ceb56f80321b50db73cf77a0e2445ad0211fb8e38d
+      source_hash: 1c12a5df43421795054874fd54bb8b37d242949133b5bf6052a063a13a93f13a20e6e9dae2b3d85b9c7034ec977bbc2b6e7f66832182b9c863711d78bfe60faa
   dir:
     archive: /usr/local/lib
   linux:
