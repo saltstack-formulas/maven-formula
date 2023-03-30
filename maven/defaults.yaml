@@ -25,7 +25,7 @@ maven:
       - curl
       - gzip
     suffix: tar.gz
-    uri: http://www.apache.org/dist/maven
+    uri: https://archive.apache.org/dist/maven
     archive:
       name: null
       source: null
